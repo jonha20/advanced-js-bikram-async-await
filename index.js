@@ -1,5 +1,6 @@
 //DESARROLLA AQUI TUS SOLUCIONES
 let pokemonInfo = [];
+let dogInfo = [];
 let numAl = Math.floor(Math.random() * 1302);
 //1.- Declara una función **getRandomPokemon** que retorne un pokemon aleatorio.
 
@@ -40,10 +41,10 @@ async function getImageAndName(pokemon) {
     let data = await response.json();
     let name = data.name;
     let img = data.sprites.front_default;
-    pokemonInfo.push({
-      name: name,
-      img: img,
-    });
+    pokemonInfo.push(
+      img,
+      name
+    );
     return { name, img };
   } catch (error) {
     // Manejar errores de red o del servidor
@@ -57,13 +58,13 @@ getImageAndName("pikachu");
 async function printImageAndName() {
   const imgElement = document.createElement("img");
   const nameElement = document.createElement("h1");
-  imgElement.src = pokemonInfo[0].img;
-  nameElement.textContent = pokemonInfo[0].name;
+  imgElement.src = pokemonInfo[0];
+  nameElement.textContent = pokemonInfo[1];
   document.body.appendChild(imgElement);
   document.body.appendChild(nameElement);
   return `<section>
-    <img src="url de imagen" alt="nombre del pokemon">
-    <h1>Nombre del pokemon</h1>
+    <img src="${imgElement}" alt="${nameElement}">
+    <h1>${nameElement}</h1>
 </section>`;
 }
 
@@ -82,6 +83,7 @@ async function getRandomDogImage() {
 
     // Si la respuesta es exitosa, procesar los datos
     const data = await response.json();
+    dogInfo.push(data.message)
     return data.message;
   } catch (error) {
     // Manejar errores de red o del servidor
@@ -113,6 +115,14 @@ async function getRandomPokemonImage() {
   }
 }
 //console.log(getRandomPokemonImage());
+
+//6.- Declara una función **printPugVsPikachu** que pinte la batalla entre "Pug" y "Pikachu" (no se testea)
+
+async function printPugVsPikachu() {
+  printImageAndName()
+  
+}
+printPugVsPikachu()
 
 //7.- Declara una función **getRandomCharacter** que retorne un personaje aleatorio.
 

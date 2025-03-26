@@ -1,0 +1,21 @@
+section{
+    display: flex;
+}
+section h1{
+    padding-left: 40px;
+    padding-top: 20px;
+}
+article1{
+    padding-right: 150px;
+}
+article2{
+    padding-top: 20px;
+    padding-left: 50px;
+    width: 10%;
+}
+article2 img{
+   width:130%;
+}
+article1 img{
+    width:130%;
+ }

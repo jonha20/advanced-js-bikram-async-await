@@ -61,12 +61,12 @@ async function printImageAndName() {
   document.body.appendChild(seccion);
   const vs = document.createElement("h1");
   vs.textContent = "VS";
-  seccion.appendChild(vs)
-  seccion.appendChild(article1)
-  
+  seccion.appendChild(vs);
+  seccion.appendChild(article1);
+
   article1.appendChild(imgElement);
   article1.appendChild(nameElement);
-  
+
   return `<section>
     <img src="${imgElement}" alt="${nameElement}">
     <h1>${nameElement}</h1>
@@ -123,7 +123,7 @@ async function getRandomPokemonImage() {
 //6.- Declara una función **printPugVsPikachu** que pinte la batalla entre "Pug" y "Pikachu" (no se testea)
 async function printPugVsPikachu() {
   try {
-    getImageAndName("pikachu");
+    await getImageAndName("pikachu");
     let response = await fetch(`https://dog.ceo/api/breed/pug/images`);
     if (!response.ok) {
       throw new Error(
@@ -136,7 +136,7 @@ async function printPugVsPikachu() {
     const nameElement = document.createElement("h1");
     imgElement.src = img;
     nameElement.textContent = "Pug";
-    seccion.appendChild(article2)
+    seccion.appendChild(article2);
     article2.appendChild(imgElement);
     article2.appendChild(nameElement);
   } catch (error) {
@@ -174,7 +174,7 @@ async function getRandomCharacter() {
 //console.log(getRandomCharacter());
 
 //8.- Declara una función **getRandomCharacterInfo** que retorne de un personaje su imagen, nombre, episodios en los que aparece y el nombre del primer episodio en el que aparece + fecha de estreno
-let rickData = []
+const rickData = [];
 async function getRandomCharacterInfo() {
   try {
     // Realizar la solicitud a la API
@@ -200,19 +200,39 @@ async function getRandomCharacterInfo() {
 
     let firstEpisode = firstEpisodeData.name;
     let dateEpisode = firstEpisodeData.air_date;
-    rickData.push(img, name, episodes, firstEpisode, dateEpisode)
+    rickData.push(img, name, episodes, firstEpisode, dateEpisode);
+    
     return { img, name, episodes, firstEpisode, dateEpisode };
   } catch (error) {
     // Manejar errores de red o del servidor
     console.error("Hubo un problema con la solicitud:", error.message);
   }
 }
-getRandomCharacterInfo().then((data) => console.log(data));
+getRandomCharacterInfo()
 
 //Ejercicio 9.- Pinta los anteriores datos en el DOM (no se testea)
-const printRickMorty = () =>{
-  const seccion1 = document.createElement("section1");
-  document.body.appendChild(seccion1)
-
-}
-printRickMorty()
+const seccion1 = document.createElement("section");
+const article3 = document.createElement("article3");
+const printRickMorty = (array) => {
+  getRandomCharacterInfo().then(data => console.log(data[0])
+  )
+  document.body.appendChild(seccion1);
+  seccion1.appendChild(article3);
+  const nameElement = document.createElement("h1");
+  nameElement.textContent = rickData[0];
+  article3.appendChild(nameElement);
+  const imgElement = document.createElement("img");
+  imgElement.src = rickData[0];
+  article3.appendChild(imgElement);
+  const episodesElement = document.createElement("p");
+  episodesElement.textContent = rickData[2];
+  article3.appendChild(episodesElement);
+  const firstEpisodeElement = document.createElement("p");
+  firstEpisodeElement.textContent = rickData[3];
+  article3.appendChild(firstEpisodeElement);
+  const DatefirstEpisodeElement = document.createElement("p");
+  DatefirstEpisodeElement.textContent = rickData[4];
+  article3.appendChild(DatefirstEpisodeElement);
+  console.log(array);
+};
+printRickMorty(rickData);
